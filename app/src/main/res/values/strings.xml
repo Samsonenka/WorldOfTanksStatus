@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WorldOfTanksStatus</string>
+    <string name="enter_player_nickname">Enter player nickname</string>
+    <string name="status">STATUS</string>
+
+    <string-array name="flag__server">
+        <item>RU</item>
+        <item>EU</item>
+    </string-array>
+</resources>
