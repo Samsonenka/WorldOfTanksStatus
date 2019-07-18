@@ -36,7 +36,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewNickname"
+                android:id="@+id/textViewNickName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,7 +93,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:padding="3dp"
                 android:text="@string/wins"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -164,7 +164,7 @@
                 android:padding="3dp"
                 android:text="@string/max_frags"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -176,7 +176,7 @@
                 android:padding="3dp"
                 android:text="@string/max_damage"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -188,7 +188,7 @@
                 android:padding="3dp"
                 android:text="@string/max_xp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -205,7 +205,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -216,7 +216,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -227,7 +227,7 @@
                 android:gravity="center"
                 android:padding="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

@@ -16,6 +16,12 @@ import java.net.URL;
 
 public class DownloadUserStatus extends AsyncTask<String, Void, String> {
 
+    private String userStatus;
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         URL url = null;
@@ -53,13 +59,13 @@ public class DownloadUserStatus extends AsyncTask<String, Void, String> {
         try {
             JSONObject jsonObject = new JSONObject(s);
 
-            String userStatus = jsonObject.getJSONObject("data")
+            userStatus = jsonObject.getJSONObject("data")
                     .getJSONObject("66734749")
                     .getJSONObject("statistics")
                     .getJSONObject("all")
                     .getString("battles");
 
-            Log.i("test", userStatus);
+//            Log.i("test", userStatus);
 
         } catch (JSONException e) {
             e.printStackTrace();

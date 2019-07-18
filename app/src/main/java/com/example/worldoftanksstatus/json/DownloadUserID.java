@@ -1,7 +1,6 @@
 package com.example.worldoftanksstatus.json;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,54 +13,62 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadUserID extends AsyncTask<String, Void, String> {
+public class DownloadUserID{
 
-    @Override
-    protected String doInBackground(String... strings) {
-        URL url = null;
-        HttpURLConnection urlConnection = null;
-        StringBuilder result = new StringBuilder();
-        try {
-            url = new URL(strings[0]);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = urlConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader reader = new BufferedReader(inputStreamReader);
-            String line = reader.readLine();
+    private String userID;
 
-            while (line != null) {
-                result.append(line);
-                line = reader.readLine();
-            }
-            return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
+    public void getDataFromJson(String url){
 
         try {
-            JSONObject jsonObject = new JSONObject(s);
+            JSONObject jsonObject = new JSONObject(url);
 
-            String userID = jsonObject.getJSONArray("data")
-                                      .getJSONObject(0)
-                                      .getString("account_id");
-
-            Log.i("test", userID);
+            userID = jsonObject.getJSONArray("data")
+                    .getJSONObject(0)
+                    .getString("account_id");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static class UserIDTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            StringBuilder result = new StringBuilder();
+            try {
+                url = new URL(strings[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader reader = new BufferedReader(inputStreamReader);
+                String line = reader.readLine();
+
+                while (line != null) {
+                    result.append(line);
+                    line = reader.readLine();
+                }
+                return result.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+            return null;
+        }
 
     }
+
+    public String getUserID() {
+        return userID;
+    }
 }
+
+
