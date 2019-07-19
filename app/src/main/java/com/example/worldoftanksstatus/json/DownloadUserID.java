@@ -16,6 +16,7 @@ import java.net.URL;
 public class DownloadUserID{
 
     private String userID;
+    private String nickName;
 
     public void getDataFromJson(String url){
 
@@ -25,6 +26,10 @@ public class DownloadUserID{
             userID = jsonObject.getJSONArray("data")
                     .getJSONObject(0)
                     .getString("account_id");
+
+            nickName = jsonObject.getJSONArray("data")
+                    .getJSONObject(0)
+                    .getString("nickname");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -68,6 +73,10 @@ public class DownloadUserID{
 
     public String getUserID() {
         return userID;
+    }
+
+    public String getNickName() {
+        return nickName;
     }
 }
 

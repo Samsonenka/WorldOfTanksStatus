@@ -32,7 +32,7 @@ public class StatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-        textViewNickName = findViewById(R.id.editTextNickname);
+        textViewNickName = findViewById(R.id.textViewNickName);
         textViewBattles = findViewById(R.id.textViewBattles);
         textViewWins = findViewById(R.id.textViewWins);
         textViewFrags = findViewById(R.id.textViewFrags);
@@ -57,7 +57,7 @@ public class StatusActivity extends AppCompatActivity {
             String urlID = userIDTask.execute(String.format(USER_URL, nickName)).get();
             downloadUserID.getDataFromJson(urlID);
 
-            textViewBattles.setText(downloadUserID.getUserID());
+            textViewNickName.setText(downloadUserID.getNickName());
 
         } catch (ExecutionException e) {
             e.printStackTrace();

@@ -14,62 +14,61 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DownloadUserStatus extends AsyncTask<String, Void, String> {
 
-    private String userStatus;
+public class DownloadUserStatus{
 
-    public String getUserStatus() {
-        return userStatus;
-    }
+    public class UserStatusTask extends AsyncTask<String, Void, String> {
 
-    @Override
-    protected String doInBackground(String... strings) {
-        URL url = null;
-        HttpURLConnection urlConnection = null;
-        StringBuilder result = new StringBuilder();
-        try {
-            url = new URL(strings[0]);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = urlConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader reader = new BufferedReader(inputStreamReader);
-            String line = reader.readLine();
+        private String wins;
 
-            while (line != null) {
-                result.append(line);
-                line = reader.readLine();
-            }
-            return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-        }
-        return null;
-    }
+        public void getDataFromJson(String url){
 
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(url);
 
-        try {
-            JSONObject jsonObject = new JSONObject(s);
-
-            userStatus = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("battles");
+                wins = jsonObject.getJSONObject("data")
+                        .getJSONObject("66734749")
+                        .getJSONObject("statistics")
+                        .getJSONObject("all")
+                        .getString("wins");
 
 //            Log.i("test", userStatus);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
+        @Override
+        protected String doInBackground(String... strings) {
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            StringBuilder result = new StringBuilder();
+            try {
+                url = new URL(strings[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = urlConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader reader = new BufferedReader(inputStreamReader);
+                String line = reader.readLine();
+
+                while (line != null) {
+                    result.append(line);
+                    line = reader.readLine();
+                }
+                return result.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+            return null;
+        }
     }
 }
+
+
