@@ -17,27 +17,73 @@ import java.net.URL;
 
 public class DownloadUserStatus{
 
-    public class UserStatusTask extends AsyncTask<String, Void, String> {
+    private String wins;
+    private String max_damage;
+    private String max_frags;
+    private String battles;
+    private String max_xp;
 
-        private String wins;
+    public void getDataFromJson(String url){
 
-        public void getDataFromJson(String url){
+        try {
+            JSONObject jsonObject = new JSONObject(url);
 
-            try {
-                JSONObject jsonObject = new JSONObject(url);
+            wins = jsonObject.getJSONObject("data")
+                    .getJSONObject("66734749")
+                    .getJSONObject("statistics")
+                    .getJSONObject("all")
+                    .getString("wins");
 
-                wins = jsonObject.getJSONObject("data")
-                        .getJSONObject("66734749")
-                        .getJSONObject("statistics")
-                        .getJSONObject("all")
-                        .getString("wins");
+            max_damage = jsonObject.getJSONObject("data")
+                    .getJSONObject("66734749")
+                    .getJSONObject("statistics")
+                    .getJSONObject("all")
+                    .getString("max_damage");
 
-//            Log.i("test", userStatus);
+            max_frags = jsonObject.getJSONObject("data")
+                    .getJSONObject("66734749")
+                    .getJSONObject("statistics")
+                    .getJSONObject("all")
+                    .getString("max_frags");
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            battles = jsonObject.getJSONObject("data")
+                    .getJSONObject("66734749")
+                    .getJSONObject("statistics")
+                    .getJSONObject("all")
+                    .getString("battles");
+
+            max_xp = jsonObject.getJSONObject("data")
+                    .getJSONObject("66734749")
+                    .getJSONObject("statistics")
+                    .getJSONObject("all")
+                    .getString("max_xp");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
+
+    public String getWins() {
+        return wins;
+    }
+
+    public String getMax_damage() {
+        return max_damage;
+    }
+
+    public String getMax_frags() {
+        return max_frags;
+    }
+
+    public String getBattles() {
+        return battles;
+    }
+
+    public String getMax_xp() {
+        return max_xp;
+    }
+
+    public static class UserStatusTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -69,6 +115,7 @@ public class DownloadUserStatus{
             return null;
         }
     }
+
 }
 
 

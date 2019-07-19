@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.worldoftanksstatus.json.DownloadUserID;
+import com.example.worldoftanksstatus.json.DownloadUserStatus;
 
 import java.util.concurrent.ExecutionException;
 
@@ -24,8 +25,6 @@ public class StatusActivity extends AppCompatActivity {
     private String server;
 
     private final String USER_URL = "https://api.worldoftanks.ru/wot/account/list/?application_id=574f9bb7dd1a5433e0ef2fbfe436f342&search=%s";
-    private final String STATUS_URL = "https://api.worldoftanks.ru/wot/account/info/?application_id=574f9bb7dd1a5433e0ef2fbfe436f342&account_id=%s&fields=statistics.all.battles%2C+statistics.all.max_damage%2C+statistics.all.max_frags%2C+statistics.all.max_xp%2C+statistics.all.wins";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +51,28 @@ public class StatusActivity extends AppCompatActivity {
         }
 
         DownloadUserID.UserIDTask userIDTask = new DownloadUserID.UserIDTask();
+        DownloadUserStatus.UserStatusTask userStatusTask = new DownloadUserStatus.UserStatusTask();
+
         DownloadUserID downloadUserID = new DownloadUserID();
+        DownloadUserStatus downloadUserStatus = new DownloadUserStatus();
+
         try {
             String urlID = userIDTask.execute(String.format(USER_URL, nickName)).get();
             downloadUserID.getDataFromJson(urlID);
 
+            String statusUrl = "https://api.worldoftanks.ru/wot/account/info/?application_id=574f9bb7dd1a5433e0ef2fbfe436f342&account_id=" + downloadUserID.getUserID() +"&fields=statistics.all.battles%2C+statistics.all.max_damage%2C+statistics.all.max_frags%2C+statistics.all.max_xp%2C+statistics.all.wins";
+            String ww = userStatusTask.execute(statusUrl).get();
+            downloadUserStatus.getDataFromJson(ww);
+
+            Log.i("test", downloadUserID.getUserID());
+            Log.i("test", ww);
+
             textViewNickName.setText(downloadUserID.getNickName());
+            textViewBattles.setText(downloadUserStatus.getBattles());
+            textViewWins.setText(downloadUserStatus.getWins());
+            textViewFrags.setText(downloadUserStatus.getMax_frags());
+            textViewDamage.setText(downloadUserStatus.getMax_damage());
+            textViewXp.setText(downloadUserStatus.getMax_xp());
 
         } catch (ExecutionException e) {
             e.printStackTrace();
