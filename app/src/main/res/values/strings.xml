@@ -4,9 +4,9 @@
     <string name="status">STATUS</string>
     <string name="battles">Battles:</string>
     <string name="wins">Wins:</string>
-    <string name="max_frags">Max frags:</string>
-    <string name="max_damage">Max damage:</string>
-    <string name="max_xp">Max xp:</string>
+    <string name="max_frags">Frags:</string>
+    <string name="max_damage">Damage:</string>
+    <string name="max_xp">XP:</string>
 
     <string-array name="flag__server">
         <item>RU</item>
