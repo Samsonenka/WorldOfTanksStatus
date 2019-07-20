@@ -4,10 +4,12 @@ Data retrieval is possible on eu and py servers.
 
 **User's manual:**
 
-Open the application, select the server and enter the player's nickname.
+1. Open the application, select the server and enter the player's nickname.
 
+* RU server
 ![alt text](https://media.giphy.com/media/h8ZeE8CSqFpIgdkAOI/giphy.gif)
 
+* EU server
 ![alt text](https://media.giphy.com/media/Zd162rmrtNtVhxhTDw/giphy.gif)
 
 2. Available game data:
