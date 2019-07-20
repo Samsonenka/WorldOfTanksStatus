@@ -58,14 +58,12 @@ public class StatusActivity extends AppCompatActivity {
 
         try {
             String urlID = userIDTask.execute(String.format(USER_URL, nickName)).get();
-            downloadUserID.getDataFromJson(urlID);
-
-            String statusUrl = "https://api.worldoftanks.ru/wot/account/info/?application_id=574f9bb7dd1a5433e0ef2fbfe436f342&account_id=" + downloadUserID.getUserID() +"&fields=statistics.all.battles%2C+statistics.all.max_damage%2C+statistics.all.max_frags%2C+statistics.all.max_xp%2C+statistics.all.wins";
-            String ww = userStatusTask.execute(statusUrl).get();
-            downloadUserStatus.getDataFromJson(ww);
-
-            Log.i("test", downloadUserID.getUserID());
-            Log.i("test", ww);
+            if (downloadUserID.getDataFromJson(urlID)){
+                String statusUrl = "https://api.worldoftanks.ru/wot/account/info/?application_id=574f9bb7dd1a5433e0ef2fbfe436f342&account_id=" + downloadUserID.getUserID() +"&fields=statistics.all.battles%2C+statistics.all.max_damage%2C+statistics.all.max_frags%2C+statistics.all.max_xp%2C+statistics.all.wins";
+                downloadUserStatus.getDataFromJson(userStatusTask.execute(statusUrl).get());
+            } else {
+                Toast.makeText(this, "Player does not exist", Toast.LENGTH_SHORT).show();
+            }
 
             textViewNickName.setText(downloadUserID.getNickName());
             textViewBattles.setText(downloadUserStatus.getBattles());

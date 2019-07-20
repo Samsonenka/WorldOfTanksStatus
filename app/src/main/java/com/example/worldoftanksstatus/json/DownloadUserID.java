@@ -18,22 +18,27 @@ public class DownloadUserID{
     private String userID;
     private String nickName;
 
-    public void getDataFromJson(String url){
+    public boolean getDataFromJson(String url){
 
-        try {
-            JSONObject jsonObject = new JSONObject(url);
+        if (url != null){
+            try {
+                JSONObject jsonObject = new JSONObject(url);
 
-            userID = jsonObject.getJSONArray("data")
-                    .getJSONObject(0)
-                    .getString("account_id");
+                userID = jsonObject.getJSONArray("data")
+                        .getJSONObject(0)
+                        .getString("account_id");
 
-            nickName = jsonObject.getJSONArray("data")
-                    .getJSONObject(0)
-                    .getString("nickname");
+                nickName = jsonObject.getJSONArray("data")
+                        .getJSONObject(0)
+                        .getString("nickname");
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+                return true;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
+        return false;
     }
 
 

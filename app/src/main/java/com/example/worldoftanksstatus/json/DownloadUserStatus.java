@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
 
 public class DownloadUserStatus{
@@ -26,37 +27,18 @@ public class DownloadUserStatus{
     public void getDataFromJson(String url){
 
         try {
-            JSONObject jsonObject = new JSONObject(url);
+            JSONObject jsonObject = new JSONObject(url).getJSONObject("data");
 
-            wins = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("wins");
+            Iterator<String> keys = jsonObject.keys();
+            String key = keys.next();
 
-            max_damage = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("max_damage");
+            JSONObject jsonObjectAllData = jsonObject.getJSONObject(key).getJSONObject("statistics").getJSONObject("all");
 
-            max_frags = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("max_frags");
-
-            battles = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("battles");
-
-            max_xp = jsonObject.getJSONObject("data")
-                    .getJSONObject("66734749")
-                    .getJSONObject("statistics")
-                    .getJSONObject("all")
-                    .getString("max_xp");
+            wins = jsonObjectAllData.getString("wins");
+            max_damage = jsonObjectAllData.getString("max_damage");
+            max_frags = jsonObjectAllData.getString("max_frags");
+            battles = jsonObjectAllData.getString("battles");
+            max_xp = jsonObjectAllData.getString("max_xp");
 
         } catch (JSONException e) {
             e.printStackTrace();
